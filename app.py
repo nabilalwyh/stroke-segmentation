@@ -36,7 +36,7 @@ LABEL_STYLE = {
     "Iskemik": {"color": "#3498db", "emoji": "🔵"},
 }
 
-MODEL_PATH = "models/attention_unet_stroke_multiclass.keras"
+MODEL_PATH = "models/attention_unet_stroke_multiclass_nabila.keras"
 CONFIDENCE_THRESHOLD_DEFAULT = 0.55
 
 # =========================
