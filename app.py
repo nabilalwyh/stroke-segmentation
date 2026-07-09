@@ -233,76 +233,94 @@ if page == "Tutorial & Disclaimer":
 
     col1, col2 = st.columns(2)
 
+    # ---------- KOTAK 1 KIRI: Deskripsi Halaman ----------
     with col1:
-        st.markdown(
-            """
-            Aplikasi ini terdiri dari **2 halaman**, bisa dipilih lewat menu di sidebar kiri:
+        with st.container(border=True):
+            st.subheader("📝 Deskripsi Halaman")
+            st.markdown(
+                """
+                Aplikasi ini terdiri dari **2 halaman**, bisa dipilih lewat menu di sidebar kiri:
 
-            1. **Tutorial & Disclaimer** (halaman ini)
-            2. **Prediksi CT Scan** — unggah gambar dan lihat hasil analisis
+                1. **Tutorial & Disclaimer** (halaman ini)
+                2. **Prediksi CT Scan** — unggah gambar dan lihat hasil analisis
+                """
+            )
 
-            ### Langkah-langkah penggunaan:
-
-            1. Buka halaman **"Prediksi CT Scan"** di sidebar.
-            2. Unggah gambar CT scan otak (format **PNG, JPG, atau JPEG**).
-            3. Tunggu proses analisis berjalan (beberapa detik).
-            4. Sistem menampilkan **3 gambar berdampingan**:
-               - Gambar CT scan asli
-               - Mask hasil segmentasi (area lesi berwarna)
-               - Gambar CT scan yang sudah di-*overlay* dengan mask
-            5. Di bawah gambar akan muncul **label klasifikasi akhir**:
-               `Normal`, `Hemoragik`, atau `Iskemik`, beserta *confidence* model.
-            6. Anda bisa mengunggah gambar lain kapan saja untuk mengulang proses.
-            """
-        )
-
+    # ---------- KOTAK 1 KANAN: Tips ----------
     with col2:
-        st.info(
-            """
-            **💡 Tips agar hasil optimal:**
-            - Gunakan gambar CT scan axial (potongan melintang otak).
-            - Pastikan gambar cukup jelas / tidak buram.
-            - Satu kali unggah = satu slice CT scan.
-            """
-        )
-        st.markdown("#### Ringkasan kelas yang dideteksi")
-        st.markdown(
-            """
-            | Warna | Kelas | Keterangan |
-            |---|---|---|
-            | 🟢 | Normal | Tidak terdeteksi lesi yang meyakinkan |
-            | 🔴 | Hemoragik | Diduga terdapat perdarahan |
-            | 🔵 | Iskemik | Diduga terdapat sumbatan |
-            """
-        )
+        with st.container(border=True):
+            st.subheader("💡 Tips Agar Hasil Optimal")
+            st.markdown(
+                """
+                - Gunakan gambar CT scan axial (potongan melintang otak).
+                - Pastikan gambar cukup jelas / tidak buram.
+                - Satu kali unggah = satu slice CT scan.
+                """
+            )
+
+    col3, col4 = st.columns(2)
+
+    # ---------- KOTAK 2 KIRI: Langkah-langkah Penggunaan ----------
+    with col3:
+        with st.container(border=True):
+            st.subheader("🚀 Langkah-langkah Penggunaan")
+            st.markdown(
+                """
+                1. Buka halaman **"Prediksi CT Scan"** di sidebar.
+                2. Unggah gambar CT scan otak (format **PNG, JPG, atau JPEG**).
+                3. Tunggu proses analisis berjalan (beberapa detik).
+                4. Sistem menampilkan **3 gambar berdampingan**:
+                   - Gambar CT scan asli
+                   - Mask hasil segmentasi (area lesi berwarna)
+                   - Gambar CT scan yang sudah di-*overlay* dengan mask
+                5. Di bawah gambar akan muncul **label klasifikasi akhir**:
+                   `Normal`, `Hemoragik`, atau `Iskemik`, beserta *confidence* model.
+                6. Anda bisa mengunggah gambar lain kapan saja untuk mengulang proses.
+                """
+            )
+
+    # ---------- KOTAK 2 KANAN: Ringkasan Kelas ----------
+    with col4:
+        with st.container(border=True):
+            st.subheader("📊 Ringkasan Kelas yang Dideteksi")
+            st.markdown(
+                """
+                | Warna | Kelas | Keterangan |
+                |---|---|---|
+                | 🟢 | Normal | Tidak terdeteksi lesi yang meyakinkan |
+                | 🔴 | Hemoragik | Diduga terdapat perdarahan |
+                | 🔵 | Iskemik | Diduga terdapat sumbatan |
+                """
+            )
 
     st.markdown("---")
     st.header("⚠️ Disclaimer Medis — Wajib Dibaca")
 
-    st.error(
-        """
-        **Aplikasi ini BUKAN alat diagnosis medis dan TIDAK menggantikan penilaian tenaga medis profesional.**
+    with st.container(border=True):
+        st.error(
+            """
+            **Aplikasi ini BUKAN alat diagnosis medis dan TIDAK menggantikan penilaian tenaga medis profesional.**
 
-        - Hasil segmentasi dan klasifikasi yang ditampilkan berasal dari model *machine learning*
-          yang dilatih pada dataset terbatas, dan **berpotensi mengandung kesalahan**
-          (false positive maupun false negative).
-        - Aplikasi ini ditujukan sebagai **alat bantu penelitian dan skrining awal**, bukan dasar
-          tunggal untuk menegakkan diagnosis atau mengubah penanganan medis.
-        - **Seluruh keputusan klinis tetap harus diambil oleh dokter/radiolog yang kompeten**,
-          dengan mempertimbangkan riwayat klinis pasien dan penilaian langsung terhadap citra asli.
-        - Pengembang aplikasi tidak bertanggung jawab atas keputusan medis yang diambil hanya
-          berdasarkan keluaran sistem ini.
+            - Hasil segmentasi dan klasifikasi yang ditampilkan berasal dari model *machine learning*
+              yang dilatih pada dataset terbatas, dan **berpotensi mengandung kesalahan**
+              (false positive maupun false negative).
+            - Aplikasi ini ditujukan sebagai **alat bantu penelitian dan skrining awal**, bukan dasar
+              tunggal untuk menegakkan diagnosis atau mengubah penanganan medis.
+            - **Seluruh keputusan klinis tetap harus diambil oleh dokter/radiolog yang kompeten**,
+              dengan mempertimbangkan riwayat klinis pasien dan penilaian langsung terhadap citra asli.
+            - Pengembang aplikasi tidak bertanggung jawab atas keputusan medis yang diambil hanya
+              berdasarkan keluaran sistem ini.
 
-        Dengan melanjutkan menggunakan aplikasi ini, Anda memahami dan menyetujui hal-hal di atas.
-        """
-    )
+            Dengan melanjutkan menggunakan aplikasi ini, Anda memahami dan menyetujui hal-hal di atas.
+            """
+        )
 
     # agree = st.checkbox("Saya telah membaca dan memahami disclaimer di atas.")
-
     # if agree:
     #     st.success("Terima kasih. Silakan buka halaman **'Prediksi CT Scan'** di sidebar untuk mulai menganalisis gambar.")
     # else:
     #     st.warning("Mohon centang kotak persetujuan di atas sebelum melanjutkan ke halaman prediksi.")
+
 
 # =========================================================================
 # 9. HALAMAN 2: PREDIKSI CT SCAN
