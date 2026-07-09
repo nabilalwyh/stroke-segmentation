@@ -297,7 +297,7 @@ if page == "Tutorial & Disclaimer":
         """
     )
 
-    agree = st.checkbox("Saya telah membaca dan memahami disclaimer di atas.")
+    # agree = st.checkbox("Saya telah membaca dan memahami disclaimer di atas.")
 
     if agree:
         st.success("Terima kasih. Silakan buka halaman **'Prediksi CT Scan'** di sidebar untuk mulai menganalisis gambar.")
