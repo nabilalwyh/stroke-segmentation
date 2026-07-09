@@ -299,10 +299,10 @@ if page == "Tutorial & Disclaimer":
 
     # agree = st.checkbox("Saya telah membaca dan memahami disclaimer di atas.")
 
-    if agree:
-        st.success("Terima kasih. Silakan buka halaman **'Prediksi CT Scan'** di sidebar untuk mulai menganalisis gambar.")
-    else:
-        st.warning("Mohon centang kotak persetujuan di atas sebelum melanjutkan ke halaman prediksi.")
+    # if agree:
+    #     st.success("Terima kasih. Silakan buka halaman **'Prediksi CT Scan'** di sidebar untuk mulai menganalisis gambar.")
+    # else:
+    #     st.warning("Mohon centang kotak persetujuan di atas sebelum melanjutkan ke halaman prediksi.")
 
 # =========================================================================
 # 9. HALAMAN 2: PREDIKSI CT SCAN
