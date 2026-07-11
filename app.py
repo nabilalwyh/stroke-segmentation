@@ -207,62 +207,81 @@ page = st.sidebar.radio(
 
 # 8. HALAMAN 1: TUTORIAL & DISCLAIMER
 if page == "Tutorial & Disclaimer":
-
     st.title("🧠 Sistem Bantu Segmentasi & Klasifikasi Stroke pada CT Scan")
-    st.caption("Attention U-Net + EfficientNetB4 — Segmentasi Hemoragik / Iskemik / Normal")
+    st.caption(
+        "Attention U-Net + EfficientNetB4 — "
+        "Segmentasi Hemoragik, Iskemik, dan Normal"
+    )
 
-    st.markdown("---")
-    st.header("📖 Cara Menggunakan Aplikasi Ini")
+    st.divider()
 
-    col1, col2 = st.columns(2)
+    st.header("📖 Cara Menggunakan Aplikasi")
 
-    # Deskripsi Halaman 
-    with col1:
-        with st.container(border=True):
-            st.subheader("📝 Deskripsi Halaman")
-            st.markdown(
-                """
-                Aplikasi ini terdiri dari **2 halaman**, bisa dipilih lewat menu di sidebar kiri:
+    # Deskripsi halaman
+    with st.container(border=True):
+        st.subheader("📝 Deskripsi Halaman")
+        st.markdown(
+            """
+            Aplikasi ini terdiri dari **dua halaman** yang dapat dipilih melalui menu
+            pada sidebar sebelah kiri:
 
-                1. **Tutorial & Disclaimer** (halaman ini)
-                2. **Prediksi CT Scan** — unggah gambar dan lihat hasil analisis
-                """
-            )
+            1. **Tutorial & Disclaimer** — berisi panduan penggunaan dan peringatan aplikasi.
+            2. **Prediksi CT Scan** — digunakan untuk mengunggah citra CT scan dan melihat hasil analisis.
+            """
+        )
 
-    # Tips 
-    with col2:
-        with st.container(border=True):
-            st.subheader("🚀 Langkah-langkah Penggunaan")
-            st.markdown(
-                """
-                1. Buka halaman **"Prediksi CT Scan"** di sidebar.
-                2. Unggah gambar CT scan otak (format **PNG, JPG, atau JPEG**).
-                3. Tunggu proses analisis berjalan (beberapa detik).
-                4. Sistem menampilkan **3 gambar berdampingan**:
-                   - Gambar CT scan asli
-                   - Mask hasil segmentasi (area lesi berwarna)
-                   - Gambar CT scan yang sudah di-*overlay* dengan mask
-                5. Di bawah gambar akan muncul **label klasifikasi akhir**:
-                   `Normal`, `Hemoragik`, atau `Iskemik`, beserta *confidence* model.
-                6. Anda bisa mengunggah gambar lain kapan saja untuk mengulang proses.
-                """
-            )
+    # Langkah penggunaan
+    with st.container(border=True):
+        st.subheader("🚀 Langkah-Langkah Penggunaan")
+        st.markdown(
+            """
+            1. Pilih halaman **Prediksi CT Scan** pada sidebar.
+            2. Unggah gambar CT scan otak dalam format **PNG, JPG, atau JPEG**.
+            3. Tunggu hingga proses analisis selesai.
+            4. Sistem akan menampilkan tiga gambar:
+               - Gambar CT scan asli.
+               - Mask hasil segmentasi.
+               - Gambar CT scan dengan hasil segmentasi yang telah di-*overlay*.
+            5. Sistem akan menampilkan hasil klasifikasi berupa:
+               **Normal**, **Hemoragik**, atau **Iskemik**.
+            6. Nilai tingkat keyakinan atau *confidence* model juga akan ditampilkan.
+            7. Unggah gambar lainnya untuk melakukan analisis kembali.
+            """
+        )
 
-    col3, col4 = st.columns(2)
+    # Ringkasan kelas
+    with st.container(border=True):
+        st.subheader("📊 Ringkasan Kelas yang Dideteksi")
+        st.markdown(
+            """
+            | Warna | Kelas | Keterangan |
+            |:---:|---|---|
+            | 🟢 | **Normal** | Tidak terdeteksi lesi yang meyakinkan |
+            | 🔴 | **Hemoragik** | Terdeteksi area yang diduga sebagai perdarahan |
+            | 🔵 | **Iskemik** | Terdeteksi area yang diduga sebagai sumbatan |
+            """
+        )
 
-    # Ringkasan Kelas
-    with col3:
-        with st.container(border=True):
-            st.subheader("📊 Ringkasan Kelas yang Dideteksi")
-            st.markdown(
-                """
-                | Warna | Kelas | Keterangan |
-                |---|---|---|
-                | 🟢 | Normal | Tidak terdeteksi lesi yang meyakinkan |
-                | 🔴 | Hemoragik | Diduga terdapat perdarahan |
-                | 🔵 | Iskemik | Diduga terdapat sumbatan |
-                """
-            )
+    st.subheader("⚠️ Disclaimer")
+
+    st.error(
+        """
+        **Aplikasi ini BUKAN alat diagnosis medis dan TIDAK menggantikan penilaian tenaga medis profesional.**
+
+        - Hasil segmentasi dan klasifikasi berasal dari model *machine learning*
+          yang dilatih menggunakan dataset terbatas sehingga **masih berpotensi
+          menghasilkan kesalahan**, baik *false positive* maupun *false negative*.
+        - Aplikasi ini hanya ditujukan sebagai **alat bantu penelitian dan skrining awal**,
+          bukan sebagai dasar utama untuk menentukan diagnosis atau penanganan medis.
+        - **Seluruh keputusan klinis harus dilakukan oleh dokter atau radiolog yang kompeten**
+          dengan mempertimbangkan kondisi pasien dan citra CT scan asli.
+        - Pengembang tidak bertanggung jawab atas keputusan medis yang hanya didasarkan
+          pada hasil analisis aplikasi ini.
+
+        Dengan menggunakan aplikasi ini, pengguna dianggap telah memahami dan menyetujui
+        ketentuan tersebut.
+        """
+    )
 
 
     st.markdown("---")
