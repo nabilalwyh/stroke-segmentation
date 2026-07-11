@@ -214,7 +214,6 @@ if page == "Tutorial & Disclaimer":
     )
 
     st.divider()
-    st.header("📖 Cara Menggunakan Aplikasi")
 
     col1, col2 = st.columns(2)
 
