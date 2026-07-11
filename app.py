@@ -1,6 +1,4 @@
-# =========================
 # 1. IMPORT
-# =========================
 import streamlit as st
 import tensorflow as tf
 from tensorflow.keras import layers
@@ -9,9 +7,7 @@ import cv2
 from PIL import Image
 from io import BytesIO
 
-# =========================
 # 2. KONFIGURASI MODEL
-# =========================
 CFG = {
     "IMG_SIZE": (256, 256),   # (height, width)
     "CHANNELS": 3,
@@ -39,10 +35,7 @@ LABEL_STYLE = {
 MODEL_PATH = "models/attention_unet_stroke_multiclass_nabila.keras"
 CONFIDENCE_THRESHOLD_DEFAULT = 0.55
 
-# =========================
 # 3. CUSTOM LAYER, LOSS, & METRIC
-#    (harus identik dengan definisi saat training supaya file .keras bisa di-load)
-# =========================
 @tf.keras.utils.register_keras_serializable(package="StrokeSegmentation")
 class ResizeLike(layers.Layer):
     def call(self, inputs):
@@ -134,16 +127,12 @@ CUSTOM_OBJECTS = {
     "mean_iou": mean_iou,
 }
 
-# =========================
 # 4. LOAD MODEL
-# =========================
 @st.cache_resource(show_spinner="Memuat model Attention U-Net...")
 def load_model(model_path=MODEL_PATH):
     return tf.keras.models.load_model(model_path, custom_objects=CUSTOM_OBJECTS)
 
-# =========================
 # 5. PREPROCESS & PREDIKSI
-# =========================
 def prepare_image(uploaded_file, size=CFG["IMG_SIZE"]):
     height, width = size
     img = Image.open(uploaded_file).convert("RGB")
@@ -201,18 +190,14 @@ def to_png_bytes(rgb_image):
     success, buffer = cv2.imencode(".png", bgr)
     return buffer.tobytes() if success else b""
 
-# =========================
 # 6. STREAMLIT CONFIG
-# =========================
 st.set_page_config(
     page_title="Stroke CT Segmentation",
     page_icon="🧠",
     layout="wide",
 )
 
-# =========================
 # 7. SIDEBAR MENU
-# =========================
 st.sidebar.title("Menu")
 
 page = st.sidebar.radio(
@@ -220,9 +205,7 @@ page = st.sidebar.radio(
     ["Tutorial & Disclaimer", "Prediksi CT Scan"]
 )
 
-# =========================================================================
 # 8. HALAMAN 1: TUTORIAL & DISCLAIMER
-# =========================================================================
 if page == "Tutorial & Disclaimer":
 
     st.title("🧠 Sistem Bantu Segmentasi & Klasifikasi Stroke pada CT Scan")
@@ -233,7 +216,7 @@ if page == "Tutorial & Disclaimer":
 
     col1, col2 = st.columns(2)
 
-    # ---------- KOTAK 1 KIRI: Deskripsi Halaman ----------
+    # Deskripsi Halaman 
     with col1:
         with st.container(border=True):
             st.subheader("📝 Deskripsi Halaman")
@@ -246,7 +229,7 @@ if page == "Tutorial & Disclaimer":
                 """
             )
 
-    # ---------- KOTAK 1 KANAN: Tips ----------
+    # Tips 
     with col2:
         with st.container(border=True):
             st.subheader("💡 Tips Agar Hasil Optimal")
@@ -260,7 +243,7 @@ if page == "Tutorial & Disclaimer":
 
     col3, col4 = st.columns(2)
 
-    # ---------- KOTAK 2 KIRI: Langkah-langkah Penggunaan ----------
+    # Langkah-langkah Penggunaan
     with col3:
         with st.container(border=True):
             st.subheader("🚀 Langkah-langkah Penggunaan")
@@ -279,7 +262,7 @@ if page == "Tutorial & Disclaimer":
                 """
             )
 
-    # ---------- KOTAK 2 KANAN: Ringkasan Kelas ----------
+    # Ringkasan Kelas
     with col4:
         with st.container(border=True):
             st.subheader("📊 Ringkasan Kelas yang Dideteksi")
@@ -295,9 +278,8 @@ if page == "Tutorial & Disclaimer":
 
     st.markdown("---")
     st.header("⚠️ Disclaimer Medis — Wajib Dibaca")
-
-    with st.container(border=True):
-        st.error(
+    
+    st.error(
             """
             **Aplikasi ini BUKAN alat diagnosis medis dan TIDAK menggantikan penilaian tenaga medis profesional.**
 
@@ -315,16 +297,7 @@ if page == "Tutorial & Disclaimer":
             """
         )
 
-    # agree = st.checkbox("Saya telah membaca dan memahami disclaimer di atas.")
-    # if agree:
-    #     st.success("Terima kasih. Silakan buka halaman **'Prediksi CT Scan'** di sidebar untuk mulai menganalisis gambar.")
-    # else:
-    #     st.warning("Mohon centang kotak persetujuan di atas sebelum melanjutkan ke halaman prediksi.")
-
-
-# =========================================================================
 # 9. HALAMAN 2: PREDIKSI CT SCAN
-# =========================================================================
 elif page == "Prediksi CT Scan":
 
     st.title("🧪 Prediksi Segmentasi & Klasifikasi CT Scan")
