@@ -232,20 +232,6 @@ if page == "Tutorial & Disclaimer":
     # Tips 
     with col2:
         with st.container(border=True):
-            st.subheader("💡 Tips Agar Hasil Optimal")
-            st.markdown(
-                """
-                - Gunakan gambar CT scan axial (potongan melintang otak).
-                - Pastikan gambar cukup jelas / tidak buram.
-                - Satu kali unggah = satu slice CT scan.
-                """
-            )
-
-    col3, col4 = st.columns(2)
-
-    # Langkah-langkah Penggunaan
-    with col3:
-        with st.container(border=True):
             st.subheader("🚀 Langkah-langkah Penggunaan")
             st.markdown(
                 """
@@ -262,8 +248,10 @@ if page == "Tutorial & Disclaimer":
                 """
             )
 
+    col3, col4 = st.columns(2)
+
     # Ringkasan Kelas
-    with col4:
+    with col3:
         with st.container(border=True):
             st.subheader("📊 Ringkasan Kelas yang Dideteksi")
             st.markdown(
@@ -275,6 +263,7 @@ if page == "Tutorial & Disclaimer":
                 | 🔵 | Iskemik | Diduga terdapat sumbatan |
                 """
             )
+
 
     st.markdown("---")
     st.header("⚠️ Disclaimer Medis — Wajib Dibaca")
