@@ -132,7 +132,7 @@ CUSTOM_OBJECTS = {
 def load_model(model_path=MODEL_PATH):
     return tf.keras.models.load_model(model_path, custom_objects=CUSTOM_OBJECTS)
 
-# 5. PREPROCESS & PREDIKSI
+# 5. PREPROCESS & deteksi
 def prepare_image(uploaded_file, size=CFG["IMG_SIZE"]):
     height, width = size
     img = Image.open(uploaded_file).convert("RGB")
@@ -202,7 +202,7 @@ st.sidebar.title("Menu")
 
 page = st.sidebar.radio(
     "Pilih Halaman",
-    ["Tutorial & Disclaimer", "Prediksi CT Scan"]
+    ["Tutorial & Disclaimer", "Deteksi CT Scan"]
 )
 
 # 8. HALAMAN 1: TUTORIAL & DISCLAIMER
@@ -230,7 +230,7 @@ if page == "Tutorial & Disclaimer":
                 1. **Tutorial & Disclaimer**  
                    Berisi panduan penggunaan dan peringatan aplikasi.
 
-                2. **Prediksi CT Scan**  
+                2. **deteksi CT Scan**  
                    Digunakan untuk mengunggah citra CT scan dan melihat hasil analisis.
                 """
             )
@@ -253,7 +253,7 @@ if page == "Tutorial & Disclaimer":
             st.subheader("🚀 Langkah-Langkah Penggunaan")
             st.markdown(
                 """
-                1. Pilih halaman **Prediksi CT Scan** pada sidebar.
+                1. Pilih halaman **deteksi CT Scan** pada sidebar.
 
                 2. Unggah gambar CT scan otak dalam format **PNG, JPG, atau JPEG**.
 
@@ -295,10 +295,10 @@ if page == "Tutorial & Disclaimer":
         """
     )
 
-# 9. HALAMAN 2: PREDIKSI CT SCAN
-elif page == "Prediksi CT Scan":
+# 9. HALAMAN 2: deteksi CT SCAN
+elif page == "Deteksi CT Scan":
 
-    st.title("🧪 Prediksi Segmentasi & Klasifikasi CT Scan")
+    st.title("🧪 Deteksi Segmentasi & Klasifikasi CT Scan")
 
     st.warning(
         "⚠️ Hasil pada halaman ini adalah keluaran model AI dan **bukan diagnosis medis**. "
@@ -371,9 +371,9 @@ elif page == "Prediksi CT Scan":
         style = LABEL_STYLE.get(label, {"color": "#888", "emoji": "⚪"})
 
         if label == "Normal":
-            st.success(f"Hasil Prediksi: {label}")
+            st.success(f"Hasil deteksi: {label}")
         else:
-            st.error(f"Hasil Prediksi: {label}")
+            st.error(f"Hasil deteksi: {label}")
 
         st.markdown(
             f"""
@@ -417,14 +417,14 @@ elif page == "Prediksi CT Scan":
                 st.download_button(
                     "Unduh Mask (PNG)",
                     data=to_png_bytes(mask_rgb),
-                    file_name="mask_prediksi.png",
+                    file_name="mask_deteksi.png",
                     mime="image/png",
                 )
             with dl_col2:
                 st.download_button(
                     "Unduh Overlay (PNG)",
                     data=to_png_bytes(overlay_rgb),
-                    file_name="overlay_prediksi.png",
+                    file_name="overlay_deteksi.png",
                     mime="image/png",
                 )
     else:
