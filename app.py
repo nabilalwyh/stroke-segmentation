@@ -214,54 +214,66 @@ if page == "Tutorial & Disclaimer":
     )
 
     st.divider()
-
     st.header("📖 Cara Menggunakan Aplikasi")
 
-    # Deskripsi halaman
-    with st.container(border=True):
-        st.subheader("📝 Deskripsi Halaman")
-        st.markdown(
-            """
-            Aplikasi ini terdiri dari **dua halaman** yang dapat dipilih melalui menu
-            pada sidebar sebelah kiri:
+    col1, col2 = st.columns(2)
 
-            1. **Tutorial & Disclaimer** — berisi panduan penggunaan dan peringatan aplikasi.
-            2. **Prediksi CT Scan** — digunakan untuk mengunggah citra CT scan dan melihat hasil analisis.
-            """
-        )
+    # Kolom kiri
+    with col1:
+        with st.container(border=True):
+            st.subheader("📝 Deskripsi Halaman")
+            st.markdown(
+                """
+                Aplikasi ini terdiri dari **dua halaman** yang dapat dipilih melalui
+                menu pada sidebar sebelah kiri:
 
-    # Langkah penggunaan
-    with st.container(border=True):
-        st.subheader("🚀 Langkah-Langkah Penggunaan")
-        st.markdown(
-            """
-            1. Pilih halaman **Prediksi CT Scan** pada sidebar.
-            2. Unggah gambar CT scan otak dalam format **PNG, JPG, atau JPEG**.
-            3. Tunggu hingga proses analisis selesai.
-            4. Sistem akan menampilkan tiga gambar:
-               - Gambar CT scan asli.
-               - Mask hasil segmentasi.
-               - Gambar CT scan dengan hasil segmentasi yang telah di-*overlay*.
-            5. Sistem akan menampilkan hasil klasifikasi berupa:
-               **Normal**, **Hemoragik**, atau **Iskemik**.
-            6. Nilai tingkat keyakinan atau *confidence* model juga akan ditampilkan.
-            7. Unggah gambar lainnya untuk melakukan analisis kembali.
-            """
-        )
+                1. **Tutorial & Disclaimer**  
+                   Berisi panduan penggunaan dan peringatan aplikasi.
 
-    # Ringkasan kelas
-    with st.container(border=True):
-        st.subheader("📊 Ringkasan Kelas yang Dideteksi")
-        st.markdown(
-            """
-            | Warna | Kelas | Keterangan |
-            |:---:|---|---|
-            | 🟢 | **Normal** | Tidak terdeteksi lesi yang meyakinkan |
-            | 🔴 | **Hemoragik** | Terdeteksi area yang diduga sebagai perdarahan |
-            | 🔵 | **Iskemik** | Terdeteksi area yang diduga sebagai sumbatan |
-            """
-        )
+                2. **Prediksi CT Scan**  
+                   Digunakan untuk mengunggah citra CT scan dan melihat hasil analisis.
+                """
+            )
 
+        with st.container(border=True):
+            st.subheader("📊 Ringkasan Kelas yang Dideteksi")
+            st.markdown(
+                """
+                | Warna | Kelas | Keterangan |
+                |:---:|---|---|
+                | 🟢 | **Normal** | Tidak terdeteksi lesi yang meyakinkan |
+                | 🔴 | **Hemoragik** | Diduga terdapat perdarahan |
+                | 🔵 | **Iskemik** | Diduga terdapat sumbatan |
+                """
+            )
+
+    # Kolom kanan
+    with col2:
+        with st.container(border=True):
+            st.subheader("🚀 Langkah-Langkah Penggunaan")
+            st.markdown(
+                """
+                1. Pilih halaman **Prediksi CT Scan** pada sidebar.
+
+                2. Unggah gambar CT scan otak dalam format **PNG, JPG, atau JPEG**.
+
+                3. Tunggu hingga proses analisis selesai.
+
+                4. Sistem akan menampilkan tiga gambar:
+                   - Gambar CT scan asli.
+                   - Mask hasil segmentasi.
+                   - Gambar CT scan yang telah di-*overlay* dengan mask.
+
+                5. Sistem akan menampilkan hasil klasifikasi berupa:
+                   **Normal**, **Hemoragik**, atau **Iskemik**.
+
+                6. Nilai tingkat keyakinan atau *confidence* model juga akan ditampilkan.
+
+                7. Unggah gambar lainnya untuk melakukan analisis kembali.
+                """
+            )
+
+    # Disclaimer di bagian paling bawah
     st.subheader("⚠️ Disclaimer")
 
     st.error(
@@ -282,28 +294,6 @@ if page == "Tutorial & Disclaimer":
         ketentuan tersebut.
         """
     )
-
-
-    st.markdown("---")
-    st.header("⚠️ Disclaimer Medis — Wajib Dibaca")
-    
-    st.error(
-            """
-            **Aplikasi ini BUKAN alat diagnosis medis dan TIDAK menggantikan penilaian tenaga medis profesional.**
-
-            - Hasil segmentasi dan klasifikasi yang ditampilkan berasal dari model *machine learning*
-              yang dilatih pada dataset terbatas, dan **berpotensi mengandung kesalahan**
-              (false positive maupun false negative).
-            - Aplikasi ini ditujukan sebagai **alat bantu penelitian dan skrining awal**, bukan dasar
-              tunggal untuk menegakkan diagnosis atau mengubah penanganan medis.
-            - **Seluruh keputusan klinis tetap harus diambil oleh dokter/radiolog yang kompeten**,
-              dengan mempertimbangkan riwayat klinis pasien dan penilaian langsung terhadap citra asli.
-            - Pengembang aplikasi tidak bertanggung jawab atas keputusan medis yang diambil hanya
-              berdasarkan keluaran sistem ini.
-
-            Dengan melanjutkan menggunakan aplikasi ini, Anda memahami dan menyetujui hal-hal di atas.
-            """
-        )
 
 # 9. HALAMAN 2: PREDIKSI CT SCAN
 elif page == "Prediksi CT Scan":
