@@ -1,6 +1,6 @@
-streamlit==1.54.0
-tensorflow==2.15.1
-opencv-python-headless==4.10.0.84
-numpy==1.26.4
-Pillow==10.4.0
-protobuf==4.25.8
+streamlit
+starlette
+tensorflow
+opencv-python-headless
+numpy
+Pillow
